@@ -1,4 +1,14 @@
+using eAuction.Data;
+using eAuction.Data.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//DbContext Configuration
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+
+//Services configuration
+builder.Services.AddScoped<IProductsService, ProductsService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
